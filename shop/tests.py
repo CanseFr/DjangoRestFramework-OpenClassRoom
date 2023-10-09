@@ -66,7 +66,7 @@ class TestProduct(ShopAPITestCase):
                 'category': product.category_id
             } for product in products
         ]
-
+# Test
     def test_list(self):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
