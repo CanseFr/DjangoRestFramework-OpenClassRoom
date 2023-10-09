@@ -1,15 +1,24 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
 from shop.models import Category, Product, Article
 from shop.serializer.serializers import CategorySerializer, ProductSerializer, ArticleSerializer
 
 
-class CategoryViewset(ModelViewSet):
+class CategoryViewset(ReadOnlyModelViewSet): # Permet de passer en readOnly
+# class CategoryV:iewset(ModelViewSet):
     serializer_class = CategorySerializer
     def get_queryset(self):
-        return Category.objects.all()
+        # return Category.objects.all() # Retourn tout sans contrainte
+        queryset = Category.objects.filter(active=True)
+        category_id = self.request.GET.get('category_id')
+
+        if category_id is not None:
+            queryset = queryset.filter(category_id=category_id)
+        return queryset
+
+
 
     # def get(self, *arg, **kwargs):
     #     categories = Category.objects.all()
@@ -17,14 +26,26 @@ class CategoryViewset(ModelViewSet):
     #     return Response(serializer.data) # Pour obtenir les données sérialisées, nous appelons la propriété  data  de notre serializer. Ce sont ces données qui sont utilisées pour construire la réponse.
 
 
-class ProductViewset(ModelViewSet):
+class ProductViewset(ReadOnlyModelViewSet):
     serializer_class = ProductSerializer
 
     def get_queryset(self):
-        return Product.objects.all()
+        queryset = Product.objects.filter(active=True) # filtre sur la requete selon champ de l'entité
+        category_id = self.request.GET.get('category_id')
+
+        if category_id is not None:
+            queryset = queryset.filter(category_id = category_id)
+
+        return queryset
 
 
-class ArticleViewset(ModelViewSet):
+class ArticleViewset(ReadOnlyModelViewSet):
     serializer_class = ArticleSerializer
     def get_queryset(self):
-        return Article.objects.all()
+        queryset = Article.objects.filter(active=True)
+        article_id = self.request.GET.get('article_id')
+
+        if article_id is not None:
+            queryset = queryset.filter(article_id = article_id)
+
+        return queryset
