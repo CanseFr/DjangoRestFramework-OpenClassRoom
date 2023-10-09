@@ -64,7 +64,7 @@ class TestProduct(ShopAPITestCase):
             } for product in products
         ]
 
-
+# mes test en plus sur bnrache test
 
     def test_list(self):
         response = self.client.get(self.url)
