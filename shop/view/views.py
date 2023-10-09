@@ -16,6 +16,8 @@ class CategoryViewset(ModelViewSet):
     #     serializer = CategorySerializer(categories, many= True) # Le  paramètre  many  permet de préciser au Serializer qu’il va devoir générer une liste d’éléments à partir de l’itérable (notre queryset) qui lui est transmis.
     #     return Response(serializer.data) # Pour obtenir les données sérialisées, nous appelons la propriété  data  de notre serializer. Ce sont ces données qui sont utilisées pour construire la réponse.
 
+# TEST
+# git pull origin main
 
 class ProductViewset(ModelViewSet):
     serializer_class = ProductSerializer
