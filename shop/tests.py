@@ -54,9 +54,6 @@ class TestProduct(ShopAPITestCase):
     url = reverse_lazy('product-list')
 
     def get_product_detail_data(self, products):
-        print("ici")
-        print(products)
-        print("ici")
         return [
             {
                 'id': product.pk,
