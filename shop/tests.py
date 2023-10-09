@@ -57,8 +57,6 @@ class TestProduct(ShopAPITestCase):
         return [
             {
                 'id': product.pk,
-                'name': product.name,
-                'date_created': self.format_datetime(product.date_created),
                 'date_updated': self.format_datetime(product.date_updated),
                 'category': product.category_id
             } for product in products
